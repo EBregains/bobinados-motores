@@ -1,8 +1,7 @@
 'use client'
 
-import styled from "styled-components"
-import { useGlobalState } from "@/app/context/globalProvider"
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Search({
   placeholder,
@@ -16,15 +15,13 @@ export default function Search({
   type?: 'number' | 'text',
 }) {
 
-  const { theme } = useGlobalState();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
   // TODO:: Use a debouncer if this works
-  const handleSearch = (term: string) => {
+  const handleSearch = useDebouncedCallback((term: string) => {
 
-    console.log(term);
     const params = new URLSearchParams(searchParams);
     params.set('page', '1');  // So if the search query changes goes back to page 1
     if (term)
@@ -33,41 +30,25 @@ export default function Search({
       params.delete(attribute);
 
     replace(`${pathname}?${params.toString()}`); // Dynamicly changes de URL without refreshing the whole page 
-  }
+  }, 400);
 
   return (
-    <SearchStyled theme={theme}>
+    <div>
       <label 
-        className="label"
+        className="block text-sm font-light"
         htmlFor={attribute}>
         {labelText}
       </label>
       <input
-        className="input"
+        className="peer inline-block w-full cursor-pointer rounded-md border border-gray-200 py-1 pl-4 text-sm outline-2 placeholder:text-gray-500 text-stone-800 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-amber-600"
         placeholder={placeholder}
         type={type}
+        id={attribute}
         onChange={(e) => {
           handleSearch(e.target.value)
         }}
         defaultValue={searchParams.get(attribute)?.toString()}
       />
-    </SearchStyled>
+    </div>
   )
 }
-
-const SearchStyled = styled.div`
-  .label {
-    padding-left: .5rem
-  }
-  .input {
-    display: block;
-    padding: .2rem;
-    padding-left: .8rem;
-    margin-top: 4px;
-    background-color: transparent;
-    border-radius: 12px;
-    border: 1px solid ${(props) => props.theme.borderColor2};
-    background-color: ${(props) => props.theme.colorBg}; 
-    color: ${(props) => props.theme.colorFontPrimary};
-  }
-`

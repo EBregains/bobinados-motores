@@ -5,7 +5,7 @@ const menu = [
     id: 1,
     title: "Inicio",
     icon: home,
-    link: "/",
+    link: "/inicio",
   },
   {
     id: 2,

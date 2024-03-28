@@ -26,13 +26,13 @@ export default function Pagination({
   const paginationNumbers = generatePageNumbers(currentPage, totalPages);
   
   return (
-    <div className="flex self-center place-self-end gap-2">
+    <div className="flex self-center gap-2">
       <PageArrow
         direction="left"
         isDisabled={currentPage <= 1}
         href={createPageURL(currentPage - 1)} 
       />
-      <div className="flex -space-x-px">
+      <div className="flex">
         {paginationNumbers.map((page, index) => {
           let position: 'first' | 'last' | 'single' | 'middle' | undefined;
 

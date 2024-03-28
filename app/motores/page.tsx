@@ -3,22 +3,35 @@ import { magnifying_glass } from "../utils/icons";
 import Table from "../components/motores/Table";
 import Pagination from "../components/motores/Pagination";
 import { Suspense } from "react";
+import { MotoresTableSkeleton } from "../components/Skeletons";
+import { AddMotor } from "../components/motores/Buttons";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: 'Lista de Motores',
+};
 
 export default function MotoresPage({
   searchParams
 } : {
   searchParams?: {
-    query?: string,
+    marca?: string,
+    potencia?: string,
+    num_ranuras?: string,
     page?: string,
   }
 }) {
 
-  const query = searchParams?.query || '';
+  const query = `
+    ${searchParams?.marca || ''}&
+    ${searchParams?.potencia || ''}&
+    ${searchParams?.num_ranuras || ''}&
+  `;
+  
   const currentPage = Number(searchParams?.page) || 1;
 
-  return <div 
-    className="flex flex-col gap-4 h-full w-full px-8 py-6 border-2 border-solid border-zinc-800 rounded-2xl"
-  >
+  return <main className="relative flex flex-col gap-4 h-auto w-full px-8 py-8 rounded-2xl overflow-y-scroll">
     <div 
       className="relative flex gap-[1rem] w-full items-end "
     >
@@ -43,14 +56,15 @@ export default function MotoresPage({
        {magnifying_glass}
       </div>
     </div>
-    <Suspense>
-      <Table 
-        query=""
-        currentPage={currentPage}
-      />
+    <Suspense key={query + currentPage} fallback={<MotoresTableSkeleton />}>
+        <Table query={query} currentPage={currentPage} />
     </Suspense>
     <Pagination 
      totalPages={9}
     />
-  </div>;
+    <div className="absolute top-8 right-10">
+      <AddMotor/>
+    </div>
+    
+  </main>;
 }

@@ -1,7 +1,7 @@
 import { getFilteredMotores } from '@/app/utils/fakeDB'
 import { ViewMotor, EditMotor } from './Buttons';
 
-export default function Table({
+export default async function Table({
   query,
   currentPage,
 } : {
@@ -9,11 +9,11 @@ export default function Table({
   currentPage: number,
 } ) {
 
-  const motores = getFilteredMotores(query, currentPage);
+  const motores = await getFilteredMotores(query, currentPage);
 
   return (
     <div 
-      className="w-full h-full overflow-hidden"
+      className="w-full h-full "
     >
       <table className="table w-full">
         <thead>
@@ -47,10 +47,10 @@ export default function Table({
               <td className="whitespace-nowrap py-1 text-center">
                 <div className='hidden group-hover:flex'>
                   {/* TODO === PUT REAL ID */}
-                  <ViewMotor 
+                  <EditMotor
                     id={i}
                   />
-                  <EditMotor
+                  <ViewMotor 
                     id={i}
                   />
                 </div>

@@ -35,11 +35,21 @@ html {
     text-wrap: balance;
   }
 }
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    @apply appearance-none;
+  }
+}
+
+details > summary {
+  list-style-type: none;
+}
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
 }
 
 /* Track */
@@ -49,7 +59,7 @@ html {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #3A3C3C;
   border-radius: 8px;
 }
 

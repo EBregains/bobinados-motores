@@ -1,4 +1,4 @@
-import { arrowRight, check, edit, eye } from "@/app/utils/icons";
+import { arrowRight, edit, plus } from "@/app/utils/icons";
 import Link from "next/link";
 
 export function ViewMotor({id}: {id: number}) {
@@ -19,6 +19,16 @@ export function EditMotor({id}: {id: number}) {
       href={`motores/${id}/edit`}
     >
       {edit}
+    </Link>
+  )
+}
+
+export function AddMotor() {
+  return (
+    <Link
+      className=" flex items-center justify-center rounded-full bg-amber-600 px-4 py-4 hover:bg-amber-700 hover:animate-pulse"
+      href="/motores/create">
+        {plus}
     </Link>
   )
 }

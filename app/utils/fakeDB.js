@@ -281,9 +281,29 @@ const motores = [
   },
 ]
 
-export function getMotores() {
-  return motores;
+export async function getMotores() {
+  try {
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    console.log('Data fetch completed after 3 seconds.');
+
+    return motores;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch revenue data.');
+  }
 }
-export function getFilteredMotores(query, currentPage) {
-  return motores;
+export async function getFilteredMotores(query, currentPage) {
+  try {
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    console.log('Data fetch completed after 3 seconds.');
+
+    return motores;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch revenue data.');
+  }
 }

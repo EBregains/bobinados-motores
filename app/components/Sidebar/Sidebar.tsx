@@ -29,7 +29,7 @@ function Sidebar() {
       </div>
       <ul className="nav-items">
         {menu.map(({link, title, icon}, i) => {
-          const isActive = link === pathname;
+          const isActive = pathname.includes(link);
           return <li
             className={`nav-item ${ isActive ? "active" : ""}`}
             key={i}
@@ -46,11 +46,12 @@ function Sidebar() {
 }
 
 const SidebarStyled = styled.nav`
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   width: ${(props) => props.theme.sidebarWidth};
   background-color: ${(props) => props.theme.colorBg2};
-  border: 2px solid ${(props) => props.theme.borderColor2};
-  border-radius: 1rem;
+  border-right: 2px solid ${(props) => props.theme.borderColor2};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
