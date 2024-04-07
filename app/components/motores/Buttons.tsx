@@ -1,10 +1,10 @@
 import { arrowRight, edit, plus } from "@/app/utils/icons";
 import Link from "next/link";
 
-export function ViewMotor({id}: {id: number}) {
+export function ViewMotor({id}: {id: String}) {
   return (
     <Link 
-      className="flex justify-center items-center h-9 w-9 text-neutral-300 rounded-full hover:text-amber-600"
+      className="flex justify-center items-center text-lg h-9 w-9 text-neutral-300 rounded-full hover:text-amber-600"
       href={`motores/${id}`}
     >
       {arrowRight}
@@ -12,7 +12,7 @@ export function ViewMotor({id}: {id: number}) {
   )
 }
 
-export function EditMotor({id}: {id: number}) {
+export function EditMotor({id}: {id: String}) {
   return (
     <Link 
       className="flex justify-center items-center h-9 w-9 text-neutral-600 rounded-full hover:text-neutral-400"

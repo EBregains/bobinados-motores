@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 
 export default function CreateMotorPage() {
   return (
-    <main className="relative flex flex-col h-full w-full px-8 py-8 rounded-2xl overflow-y-scroll ">
+    <main className="relative flex flex-col h-full w-full px-12 py-12 rounded-2xl overflow-y-scroll ">
       <div className="flex h-max gap-4 pb-4 items-center border-b-4 border-neutral-700">
         <Link
           href='/motores'
-          className="opacity-60 hover:opacity-100 hover:animate-pulse border-r-2 pr-4"
+          className="opacity-80 hover:opacity-100 hover:animate-pulse hover:text-amber-600 text-lg pr-4"
         >{arrowLeft}</Link>
         <h1 className="font-medium text-3xl">Añadir motor</h1>
       </div>

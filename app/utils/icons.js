@@ -1,4 +1,4 @@
-export const bars = <i className="fa-solid fa-bars fa-beat"></i>;
+export const bars = <i className="fa-solid fa-bars"></i>;
 export const arrowLeft = <i className="fa-solid fa-arrow-left"></i>;
 export const arrowRight = <i className="fa-solid fa-arrow-right"></i>;
 export const caretLeft = <i className="fa-sharp fa-solid fa-caret-left"></i>;
@@ -29,4 +29,6 @@ export const admin = <i className="fa-solid fa-lock"></i>;
 export const linked = <i className="fa-brands fa-linkedin"></i>;
 export const mailIcon = <i className="fa-solid fa-envelope"></i>;
 export const plus = <i className="fa-solid fa-plus"></i>;
+export const minus = <i className="fa-solid fa-minus"></i>
 export const magnifying_glass = <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
+export const spinner = <i className="fa-solid fa-spinner"></i>

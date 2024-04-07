@@ -1,12 +1,13 @@
 "use client"
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useGlobalState } from "@/app/context/globalProvider"
 import menu from "@/app/utils/menu"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Krona_One } from "next/font/google";
+import { arrowLeft, bars } from "@/app/utils/icons";
 
 const kronaOne = Krona_One({ 
   weight:["400"],
@@ -18,14 +19,22 @@ function Sidebar() {
 
   const { theme } = useGlobalState();
   const pathname = usePathname();
-
+  const [ isCollapsed, setIsCollapsed ] = useState(true) 
+  
+  const collapseMenu = () => (
+    setIsCollapsed((prev) => (!prev))
+  )
   return(
-    <SidebarStyled theme={theme}>
+    <SidebarStyled theme={theme} collapsed={isCollapsed}>
+      <button className="toggle-nav" onClick={collapseMenu}>
+        <span>{isCollapsed ? bars : arrowLeft}</span>
+      </button>
       <div className="profile">
         <div className="profile-overlay"></div>
-        <h1 style={kronaOne.style}>
+        <Link
+          href="https://electromecanicaodriozola.com" target="_blank" style={kronaOne.style}>
           ODRIOZOLA
-        </h1>
+        </Link>
       </div>
       <ul className="nav-items">
         {menu.map(({link, title, icon}, i) => {
@@ -45,9 +54,8 @@ function Sidebar() {
   )
 }
 
-const SidebarStyled = styled.nav`
-  position: -webkit-sticky;
-  position: sticky;
+const SidebarStyled = styled.nav<{collapsed: true | false}>`
+  position: relative;
   top: 0;
   width: ${(props) => props.theme.sidebarWidth};
   background-color: ${(props) => props.theme.colorBg2};
@@ -55,6 +63,8 @@ const SidebarStyled = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
+  transition: all 0.3s cubic-bezier(0.53, 0.21, 0, 1);
 
   color: ${(props) => props.theme.colorGrey3};
 
@@ -72,7 +82,7 @@ const SidebarStyled = styled.nav`
     display: flex;
     justify-content: center;
 
-    h1 {
+    a {
       font-size: 1.2rem;
       font-family: var(--font-krona);
       letter-spacing: -1px;
@@ -145,6 +155,34 @@ const SidebarStyled = styled.nav`
 
   > button {
     margin: 1.5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+
+    transform: ${(props) =>
+      props.collapsed ? "translateX(-100%)" : "translateX(0)"};
+
+    .toggle-nav {
+      display: block !important;
+    }
+  }
+
+  .toggle-nav {
+    display: none;
+    padding: 0.8rem 0.9rem;
+    position: absolute;
+    right: -69px;
+    top: 0;
+    margin-top: 0;
+
+    border-bottom-right-radius: 1rem;
+
+    background-color: ${(props) => props.theme.colorBg2};
+    border-right: 2px solid ${(props) => props.theme.borderColor2};
+    border-bottom: 2px solid ${(props) => props.theme.borderColor2};
   }
 `;
 
